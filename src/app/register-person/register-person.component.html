@@ -22,7 +22,7 @@
             <label for="idNumber">ID Number</label>
             <input autocomplete="off" class="form-control" id="idNumber" name="idNumber"
                    required formControlName="idNumber"
-                   data-toggle="tooltip" data-placement="top" title="Valid South African ID Number"
+                   data-toggle="tooltip" data-placement="top" title="Enter a valid South African ID Number"
                    type="number" placeholder="ID Number">
             <span class="text-danger"
                   *ngIf="(registrationForm.get('idNumber').touched || submitted) &&
@@ -36,7 +36,7 @@
             <input autocomplete="off" class="form-control" id="telephoneNumber"
                    name="telephoneNumber" formControlName="telephoneNumber"
                    required type="text" placeholder="Telephone Number" data-toggle="tooltip" data-placement="top"
-                   title="10 Digit number">
+                   title="Enter a 10 Digit number">
             <span class="text-danger"
                   *ngIf="(registrationForm.get('idNumber').touched || submitted) &&
                 registrationForm.get('idNumber').errors?.required">
