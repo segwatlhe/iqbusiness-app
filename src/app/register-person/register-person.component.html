@@ -38,8 +38,8 @@
                    required type="text" placeholder="Telephone Number" data-toggle="tooltip" data-placement="top"
                    title="Enter a 10 Digit number">
             <span class="text-danger"
-                  *ngIf="(registrationForm.get('idNumber').touched || submitted) &&
-                registrationForm.get('idNumber').errors?.required">
+                  *ngIf="(registrationForm.get('telephoneNumber').touched || submitted) &&
+                registrationForm.get('telephoneNumber').errors?.required">
                 Telephone number is required
           </span>
           </div>
