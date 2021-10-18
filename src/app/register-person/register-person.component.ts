@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Person} from '../model/person';
 import {RegistrationService} from '../service/registration.service';
-import {error} from 'util';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, FormGroupDirective, ValidatorFn, Validators} from '@angular/forms';
+import {NotificationService} from '../service/notification.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-person',
@@ -15,7 +16,8 @@ export class RegisterPersonComponent implements OnInit {
   person: Person = new Person();
   registrationForm: FormGroup;
 
-  constructor(private registrationService: RegistrationService, private fb: FormBuilder) {
+  constructor(private registrationService: RegistrationService, private fb: FormBuilder, private notifyService: NotificationService,
+              private router: Router) {
   }
 
   get registerFormControl() {
@@ -46,19 +48,8 @@ export class RegisterPersonComponent implements OnInit {
     };
   }
 
-  telephoneNumberPatternValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } => {
-      if (!control.value) {
-        return null;
-      }
-      // tslint:disable-next-line:max-line-length
-      const regex = new RegExp('[0]\\d{2}-\\d{7}');
-      const valid = regex.test(control.value);
-      return valid ? null : {invalidPassword: true};
-    };
-  }
-
   ngOnInit() {
+    this.notifyService.showInfo('Welcome', 'IQ Business');
     this.person = new Person();
     this.registrationForm = this.fb.group({
       fullName: new FormControl('', [Validators.required, Validators.compose([this.fullNamepatternValidator()])]),
@@ -72,13 +63,15 @@ export class RegisterPersonComponent implements OnInit {
     if (this.registrationForm.valid) {
       this.registrationService.registerPerson(this.registrationForm.value).subscribe(
         data => {
-          console.log('data', data);
+          this.router.navigate(['/viewReport']);
+          this.notifyService.showSuccess('Registration successful', 'IQ Business');
         },
-        error1 => {
-          console.log('data', error1);
+        // tslint:disable-next-line:no-shadowed-variable
+        error => {
+          console.error('data', error);
+          this.notifyService.showError('Registration unsuccessful', 'IQ Business');
         }
       );
-      this.submitted = true;
     }
 
   }
