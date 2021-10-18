@@ -1,0 +1,60 @@
+<h3>Register Person</h3>
+<div class="row justify-content-center">
+  <div [hidden]="submitted" style="width: 400px;">
+    <form [formGroup]="registrationForm">
+
+      <div class="card-body">
+
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input autocomplete="off" class="form-control" id="fullName" name="fullName"
+                 required formControlName="fullName"
+                 type="text" placeholder="Full Name">
+          <span class="text-danger"
+                *ngIf="(registrationForm.get('fullName').touched || submitted) &&
+                registrationForm.get('fullName').errors?.required">
+                Full name is required
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="idNumber">ID Number</label>
+          <input autocomplete="off" class="form-control" id="idNumber" name="idNumber"
+                 required formControlName="idNumber"
+                 data-toggle="tooltip" data-placement="top" title="Valid South African ID Number"
+                 type="number" placeholder="ID Number">
+          <span class="text-danger"
+                *ngIf="(registrationForm.get('idNumber').touched || submitted) &&
+                registrationForm.get('idNumber').errors?.required">
+                ID Number is required
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="telephoneNumber">Telephone Number</label>
+          <input autocomplete="off" class="form-control" id="telephoneNumber"
+                 name="telephoneNumber" formControlName="telephoneNumber"
+                 required type="text" placeholder="Telephone Number" data-toggle="tooltip" data-placement="top" title="10 Digit number">
+          <span class="text-danger"
+                *ngIf="(registrationForm.get('idNumber').touched || submitted) &&
+                registrationForm.get('idNumber').errors?.required">
+                Telephone number is required
+          </span>
+        </div>
+
+        <button class="btn btn-success" type="submit" (click)="onSubmit()">Submit</button>
+
+      </div>
+
+    </form>
+    <footer class="footer">
+      <span>All Rights Reserved 2021 @IQBusiness</span>
+    </footer>
+  </div>
+
+  <div [hidden]="!submitted">
+    <h4>Person Registered Successfully!</h4>
+    <!-- <button class="btn btn-success" (click)="newEmployee()">Add</button> -->
+  </div>
+
+</div>

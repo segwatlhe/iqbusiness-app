@@ -1,0 +1,27 @@
+<h3>View Report</h3>
+
+<div class="container">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Telephone Number</th>
+      <th scope="col">ID Number</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let person of persons | async" class="table-primary">
+      <td>{{person.id}}</td>
+      <td>{{person.fullName}}</td>
+      <td>{{person.telephoneNumber}}</td>
+      <td>{{person.idNumber}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<footer class="footer">
+  <div class="container">
+    <span>All Rights Reserved 2021 @IQBusiness</span>
+  </div>
+</footer>
