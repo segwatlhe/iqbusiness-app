@@ -12,7 +12,6 @@ import {Router} from '@angular/router';
 })
 export class RegisterPersonComponent implements OnInit {
 
-  submitted = false;
   person: Person = new Person();
   registrationForm: FormGroup;
 
@@ -20,11 +19,8 @@ export class RegisterPersonComponent implements OnInit {
               private router: Router) {
   }
 
-  get registerFormControl() {
-    return this.registrationForm.controls;
-  }
-
-  fullNamepatternValidator(): ValidatorFn {
+  // at least 2 characters and no numbers in name
+  fullNamePatternValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
         return null;
@@ -32,10 +28,11 @@ export class RegisterPersonComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       const regex = new RegExp('^(?!\\s*$_:,.)[-a-zA-Z\\s]{2,100}$');
       const valid = regex.test(control.value);
-      return valid ? null : {invalidPassword: true};
+      return valid ? null : {invalidFullName: true};
     };
   }
 
+  // valid RSA ID number
   idNumberPatternValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
@@ -44,15 +41,14 @@ export class RegisterPersonComponent implements OnInit {
       // tslint:disable-next-line:max-line-length
       const regex = new RegExp('(((\\d{2}((0[13578]|1[02])(0[1-9]|[12]\\d|3[01])|(0[13456789]|1[012])(0[1-9]|[12]\\d|30)|02(0[1-9]|1\\d|2[0-8])))|([02468][048]|[13579][26])0229))(( |-)(\\d{4})( |-)(\\d{3})|(\\d{7}))');
       const valid = regex.test(control.value);
-      return valid ? null : {invalidPassword: true};
+      return valid ? null : {invalidIdNumber: true};
     };
   }
 
   ngOnInit() {
     this.notifyService.showInfo('Welcome', 'IQ Business');
-    this.person = new Person();
     this.registrationForm = this.fb.group({
-      fullName: new FormControl('', [Validators.required, Validators.compose([this.fullNamepatternValidator()])]),
+      fullName: new FormControl('', [Validators.required, Validators.compose([this.fullNamePatternValidator()])]),
       idNumber: new FormControl('', [Validators.required, Validators.compose([this.idNumberPatternValidator()])]),
       telephoneNumber: new FormControl('', [Validators.minLength(10), Validators.maxLength(10)]),
     });
