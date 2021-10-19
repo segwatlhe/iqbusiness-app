@@ -1,7 +1,7 @@
 <div class="gainsboro">
   <h3>Register Person</h3>
   <div class="row justify-content-center">
-    <div [hidden]="submitted" style="width: 400px;">
+    <div style="width: 400px; background-color: white">
       <form [formGroup]="registrationForm">
 
         <div class="card-body">
@@ -12,7 +12,7 @@
                    required formControlName="fullName"
                    type="text" placeholder="Full Name">
             <span class="text-danger"
-                  *ngIf="(registrationForm.get('fullName').touched || submitted) &&
+                  *ngIf="(registrationForm.get('fullName').touched) &&
                 registrationForm.get('fullName').errors?.required">
                 Full name is required
           </span>
@@ -25,7 +25,7 @@
                    data-toggle="tooltip" data-placement="top" title="Enter a valid South African ID Number"
                    type="number" placeholder="ID Number">
             <span class="text-danger"
-                  *ngIf="(registrationForm.get('idNumber').touched || submitted) &&
+                  *ngIf="(registrationForm.get('idNumber').touched) &&
                 registrationForm.get('idNumber').errors?.required">
                 ID Number is required
           </span>
@@ -38,7 +38,7 @@
                    required type="text" placeholder="Telephone Number" data-toggle="tooltip" data-placement="top"
                    title="Enter a 10 Digit number">
             <span class="text-danger"
-                  *ngIf="(registrationForm.get('telephoneNumber').touched || submitted) &&
+                  *ngIf="(registrationForm.get('telephoneNumber').touched) &&
                 registrationForm.get('telephoneNumber').errors?.required">
                 Telephone number is required
           </span>
@@ -47,12 +47,10 @@
           <button class="btn btn-warning" type="submit" (click)="onSubmit()">Submit</button>
 
         </div>
-
       </form>
-      <footer class="footer">
-        <span>All Rights Reserved 2021 @IQBusiness</span>
-      </footer>
     </div>
-
+    <footer class="footer">
+      <span class="row justify-content-center">All Rights Reserved 2021 @IQBusiness</span>
+    </footer>
   </div>
 </div>
