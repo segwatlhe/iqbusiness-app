@@ -12,7 +12,6 @@ import {Router} from '@angular/router';
 })
 export class RegisterPersonComponent implements OnInit {
 
-  person: Person = new Person();
   registrationForm: FormGroup;
 
   constructor(private registrationService: RegistrationService, private fb: FormBuilder, private notifyService: NotificationService,
