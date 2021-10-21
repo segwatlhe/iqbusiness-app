@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Person} from '../model/person';
 import {RegistrationService} from '../service/registration.service';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {NotificationService} from '../service/notification.service';
