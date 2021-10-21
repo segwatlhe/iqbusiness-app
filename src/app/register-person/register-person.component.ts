@@ -46,11 +46,16 @@ export class RegisterPersonComponent implements OnInit {
 
   ngOnInit() {
     this.notifyService.showInfo('Welcome', 'IQ Business');
+    this.buildRegistrationFrom();
+  }
+
+  buildRegistrationFrom() {
     this.registrationForm = this.fb.group({
-      fullName: new FormControl('', [Validators.required, Validators.compose([this.fullNamePatternValidator()])]),
-      idNumber: new FormControl('', [Validators.required, Validators.compose([this.idNumberPatternValidator()])]),
-      telephoneNumber: new FormControl('', [Validators.minLength(10), Validators.maxLength(10)]),
-    });
+        fullName: new FormControl('', [Validators.required, Validators.compose([this.fullNamePatternValidator()])]),
+        idNumber: new FormControl('', [Validators.required, Validators.compose([this.idNumberPatternValidator()])]),
+        telephoneNumber: new FormControl('', [Validators.minLength(10), Validators.maxLength(10)]),
+      }
+    );
   }
 
   onSubmit() {
